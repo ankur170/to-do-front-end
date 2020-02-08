@@ -6,11 +6,9 @@ import Summit from './summit'
 import netwrkcall from './networkcall/netwrkcall'
 
 const Myname=()=>{
-    const [counter,setCounter]=useState('')
-    const handler=(event)=>{
-    netwrkcall.insertdata(event.target.value)
-    setCounter(event.target.value)
-    }
+
+    const [input,setinput]=useState('')
+    const [arr,setarr]=useState([])
 
     useEffect(()=>{
         netwrkcall.getdata().then(
@@ -18,19 +16,27 @@ const Myname=()=>{
                 setarr(res)
             }
         )
-        })
-      
+        },[])
 
-    const [arr,setarr]=useState([]) 
+
+    const inputset=(event)=>{
+        setinput(event.target.value)
+    }
     
-    const arrHandler=()=>{
-            setarr(arr.concat(counter))
+
+    const handler=(event)=>{
+        setarr(arr.concat(input))
+        netwrkcall.insertdata(input)
+    }
+    const clickhandler=(event)=>{
+        netwrkcall.add_imp(event.target.id) 
+        
     }
 
 return(<>
-       <Input handler={handler}/>
-       <Summit arrHandler= {arrHandler}/>
-       <Makearray arr={arr}/>
+       <Input oninput={inputset}/>
+       <Summit arrHandler={handler}/>
+       <Makearray arr={arr} clickhandler={clickhandler}/>
         
        </>)}
 
