@@ -1,24 +1,18 @@
-import React from 'react';
-
-const Hello = (props)=>{
-  const {name , age} = props;
-  const bornYear = ()=> new Date().getFullYear() - age ;
-  return(
-    <>
-    <h2>here is hello component and helloing to {name}  whom age is {age}</h2>
-    <h3>born year is {bornYear()}</h3>
-    </>
-  )
-}
+import React,{useState} from 'react';
 
 const App = ()=> {
 
-  const name = "ankur yadav";
-  const age= 23;
+  const [counter,setCounter] = useState(0);
+  
+  console.log(`counter value is updated ${counter} time`)
+  setTimeout(() => {
+    setCounter(counter+1)
+    console.log(` ${counter} `)
+  }, 5000);
+ console.log(`last counter is ${counter}`)
   return (
     <div >
-      <h1>Hello , React</h1>
-      <Hello  name = {name} age={age} />
+      <h3>counter is {counter} </h3>
     </div>
   );
 }
